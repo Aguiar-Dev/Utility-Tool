@@ -1,0 +1,14 @@
+{
+  "name": "utility_tool",
+  "version": "1.0.0",
+  "description": "Simple debugging and logging tool.",
+  "main": "src/util.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Debugger"
+  ],
+  "author": "Fernando L. Aguiar",
+  "license": "ISC"
+}
