@@ -7,7 +7,7 @@ Utility Tool in order to debug code. Runs console logs, checks objects in order 
 
 In order to setup the Util tool simply follow these steps:
 
-1. Install the module into your project using `npm install util-tool --save-dev`
+1. Install the module into your project using `npm install util-tool`
 
 2. Now that you have the module installed simply require it in your project files by using `var util = require('util-tool')`
 
