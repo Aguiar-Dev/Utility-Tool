@@ -48,29 +48,30 @@ exports.debug = (data) => {
   // setting up local variables
   let info;
   let passing = true;
-
-  // Check if data passed is undefined or not
-  if (data !== undefined) {
-    // if Checks if data passed is empty / Else if checks for data in the correct format
-    if (Object.keys(data).length === 0 || data.length === 0) {
-      passing = true;
-    } else if (Object.keys(data).length > 0 || data.length > 0) {
-      passing = false;
+  if (process.env.DEBUG) {
+    // Check if data passed is undefined or not
+    if (data !== undefined) {
+      // if Checks if data passed is empty / Else if checks for data in the correct format
+      if (Object.keys(data).length === 0 || data.length === 0) {
+        passing = true;
+      } else if (Object.keys(data).length > 0 || data.length > 0) {
+        passing = false;
+      } // end if/else
+    } else {
+      // Setting up the undefined data response
+      logstatus = '\nData was undefined.\n';
+      this.log('Data Check ?', data, '\nData was undefined.\n'.error);
+      return null;
     } // end if/else
-  } else {
-    // Setting up the undefined data response
-    logstatus = '\nData was undefined.\n';
-    this.log('Data Check ?', data, '\nData was undefined.\n'.error);
-    return null;
-  } // end if/else
 
-  // Sets up the response for either empty or correct data
-  if (passing === true) {
-    logstatus = '\nData was empty.\n';
-    info = this.log('Data Check -', data, '\nData was empty.\n'.error);
-  } else {
-    logstatus = '\nData was passed correctly.\n';
-    info = this.log('Data Check +', data, '\nData was passed correctly.\n'.good);
-  } // end if/else
+    // Sets up the response for either empty or correct data
+    if (passing === true) {
+      logstatus = '\nData was empty.\n';
+      info = this.log('Data Check -', data, '\nData was empty.\n'.error);
+    } else {
+      logstatus = '\nData was passed correctly.\n';
+      info = this.log('Data Check +', data, '\nData was passed correctly.\n'.good);
+    } // end if/else
+  }
   return info;
 };
