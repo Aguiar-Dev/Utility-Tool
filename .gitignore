@@ -34,7 +34,5 @@ node_modules
 
 # Additional Ignores
 .DS_Store
-.env
-.env.json
 out
 build

@@ -1,0 +1,20 @@
+{
+	"env": {
+		"node": true
+	},
+	"extends": "airbnb",
+	"plugins": [
+        "react"
+    ],
+	"rules": {
+		"new-cap": 0,
+		"prefer-template": 0,
+		"global-require": 0,
+		"no-unused-vars": [2, {"args": "after-used", "argsIgnorePattern": "^_"}],
+		"no-unused-vars": [2, {"vars": "all", "argsIgnorePattern": "^_"}]
+	},
+	"globals": {
+		"describe": true,
+		"it": true
+	}
+}
