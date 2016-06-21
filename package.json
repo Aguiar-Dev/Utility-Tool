@@ -1,5 +1,5 @@
 {
-  "name": "utility_tool",
+  "name": "util-tool",
   "version": "1.0.0",
   "description": "Simple debugging and logging tool.",
   "main": "src/util.js",

@@ -60,7 +60,7 @@ exports.debug = (data) => {
   } else {
     // Setting up the undefined data response
     logstatus = '\nData was undefined.\n';
-    this.log('Data Check', data, '\nData was undefined.\n'.error);
+    this.log('Data Check ?', data, '\nData was undefined.\n'.error);
     return null;
   } // end if/else
 
@@ -74,3 +74,5 @@ exports.debug = (data) => {
   } // end if/else
   return info;
 };
+
+this.debug(['array']);
