@@ -74,5 +74,3 @@ exports.debug = (data) => {
   } // end if/else
   return info;
 };
-
-this.debug(['array']);
