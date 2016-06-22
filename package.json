@@ -3,6 +3,10 @@
   "version": "1.2.0",
   "description": "Simple debugging and logging tool.",
   "main": "src/util.js",
+  "engines": {
+    "node": "v6.2.0",
+    "npm": "3.9.8"
+  },
   "scripts": {
     "start": "node src/util.js",
     "test": "DEBUG=true mocha"
