@@ -11,7 +11,9 @@ In order to setup the Util tool simply follow these steps:
 
 2. Now that you have the module installed simply require it in your project files by using `var util = require('util-tool')`
 
-3. Enjoy the utility tool ( ^-^)
+3. In order to use the debugging functionality of the tool you have to run your project in DEBUG mode. Simply turn DEBUG mode on by running `DEBUG=true` whenever you start the server.
+
+4. Enjoy the utility tool ( ^-^)
 
 The util-tool was tested using Mocha and Chai for the unit testing. But the unit testing is not included in the npm install.
 

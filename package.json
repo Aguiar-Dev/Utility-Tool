@@ -1,11 +1,11 @@
 {
   "name": "util-tool",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Simple debugging and logging tool.",
   "main": "src/util.js",
   "scripts": {
     "start": "node src/util.js",
-    "test": "mocha"
+    "test": "DEBUG=true mocha"
   },
   "keywords": [
     "Debugger"
