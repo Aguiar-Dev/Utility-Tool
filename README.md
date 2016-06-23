@@ -25,24 +25,23 @@ The util-tool was tested using Mocha and Chai for the unit testing. But the unit
 
 ### Logging
 
-In order to log using the util tool simply remember this format `util.writer(title, data, status, consoleMethod)`.
+In order to log using the util tool simply remember this format `util.log(title, data, status)`.
 
-- Title: is the header of the log.
+- Title: is the header of the log. It makes it easier to discern where you log is in the logfiles.
 - Data: is any type of data that you pass in. For logging purposes data is simply a placeholder.
-- Status: is meant to be any piece of information that would benefit the developer. Ex: `Test #3: Successful function`
-- consoleMethod: takes one of the strings in the array based on what kind of console you want ['log', 'warn', 'error'].
-They will console in different colors.
+- Status: is meant to be any piece of information that would benefit the developer. Ex: `Test #3: Succesful function`
 
 Example Output:
 ```
-util.writer('Testing Log', '', 'Test successful', 'log')
+util.log('Testing Log', '', 'Test successful')
 //Data was passed in as an empty string in order to leave whitespace.
 
 Output:
 =================================================
-[2016-06-23T14:48:26-04:00]: Testing Log
+[2016-06-20T23:18:22-04:00]: Testing Log
 =================================================
- "" Test successful
+''
+Test Successful
 ```
 
 ### Debugging
@@ -97,13 +96,13 @@ This module is good to use with gulp.
 Call this module to increment the version number.
 
 #### Usage
-```javascript
+```javasc
 const util = require('util-tool');
 
 // takes the current version -> (string)  & tag -> (string) ['major', 'minor', 'patch']
 util.versionbump('1.0.0', 'major');
 ```
 #### Returns (string)
-```javascript
+```
 '2.0.0'
 ```
