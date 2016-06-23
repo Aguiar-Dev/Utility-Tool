@@ -1,8 +1,6 @@
 // Setting up all requirements for the tool
 const moment = require('moment');
 const colors = require('colors');
-const fs = require('fs');
-const dir = './log';
 let logstatus;
 
 // Setting local colors theme for the logging
@@ -15,31 +13,30 @@ colors.setTheme({
 });
 
 // The Logging functionality of the utility tool (meant to substitute console.log)
-exports.log = (title, data, status) => {
+exports.writer = (title, data, status, consoleMethod) => {
   // Sets up all information to be displayed with colors on console.
   const obj = JSON.stringify(data);
   const now = moment().format();
-  let seperator = '\n=================================================\n'.info;
-  let output = seperator + ('[' + now + ']: ').good + title.header + seperator;
+  const seperator = '\n=================================================\n'.info;
+  const output = seperator + ('[' + now + ']: ').good + title.header + seperator;
 
-  /* eslint-disable */
-  console.log(output, colors.data(obj), status);
-  /* eslint-enable */
-
-  // Creates Logs folder if it does not already exist
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
+  if (consoleMethod === 'log') {
+    /* eslint-disable */
+    console.log(output, colors.data(obj), status);
+    /* eslint-enable */
+  } else if (consoleMethod === 'error') {
+    /* eslint-disable */
+    console.error(output, colors.error(obj), status);
+    /* eslint-enable */
+  } else if (consoleMethod === 'warn') {
+    /* eslint-disable */
+    console.warn(output, colors.header(obj), status);
+    /* eslint-enable */
+  } else {
+    /* eslint-disable */
+    console.error(colors.error('You have passed a invalid method'));
+    /* eslint-enable */
   }
-
-  // Resets all data to original values, without color modifications
-  seperator = '\n=================================================\n';
-  output = seperator + '[' + now + ']: ' + title + seperator;
-  const log = output + obj + logstatus;
-  // Appends the log to the log.txt file
-  fs.appendFile('log/logfile.log', log, (err) => {
-    /* istanbul ignore if */
-    if (err) throw err;
-  });
 };
 
 // The Dubugging functionality
@@ -60,17 +57,17 @@ exports.debug = (data) => {
     } else {
       // Setting up the undefined data response
       logstatus = '\nData was undefined.\n';
-      this.log('Data Check ?', data, '\nData was undefined.\n'.error);
+      this.writer('Data Check ?', data, logstatus.error, 'error');
       return null;
     } // end if/else
 
     // Sets up the response for either empty or correct data
     if (passing === true) {
       logstatus = '\nData was empty.\n';
-      info = this.log('Data Check -', data, '\nData was empty.\n'.error);
+      info = this.writer('Data Check -', data, logstatus.error, 'error');
     } else {
       logstatus = '\nData was passed correctly.\n';
-      info = this.log('Data Check +', data, '\nData was passed correctly.\n'.good);
+      info = this.writer('Data Check +', data, logstatus.good, 'log');
     } // end if/else
   }
   return info;

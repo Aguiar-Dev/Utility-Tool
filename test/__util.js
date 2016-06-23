@@ -7,36 +7,37 @@ chai.use(require('chai-fs'));
 const expect = require('chai').expect;
 const util = require('../src/util');
 const sinon = require('sinon');
-const fs = require('fs');
-const rimraf = require('rimraf');
+// const fs = require('fs');
+// const rimraf = require('rimraf');
+
 
 // Setting up global variables
-const path = './log/';
+// const path = './log/';
 let call;
 
 // Describe Unit Testing
 describe('Utility Tool Testing', () => {
   // Before Each Test run...
   beforeEach(() => {
-    call = sinon.spy(util, 'log');
+    call = sinon.spy(util, 'writer');
   });
   // After Each Test run...
   afterEach(() => {
     call.restore();
   });
 
-  // Test for 'log' directory creation
-  it('| Should create the log dir if dir !exist', (done) => {
-    // rimraf module to delete log directory for test
-    rimraf(path, (err) => {
-      if (err) throw err;
-
-      // Create new dir through the util.log then verify that is exists
-      util.log('Log dir !exist', '', '\nCreating log dir.\n');
-      expect(path).to.be.a.directory();
-      done();
-    });
-  }); // end dir test
+  // // Test for 'log' directory creation
+  // it('| Should create the log dir if dir !exist', (done) => {
+  //   // rimraf module to delete log directory for test
+  //   rimraf(path, (err) => {
+  //     if (err) throw err;
+  //
+  //     // Create new dir through the util.log then verify that is exists
+  //     util.writer('Log dir !exist', '', '\nCreating log dir.\n');
+  //     expect(path).to.be.a.directory();
+  //     done();
+  //   });
+  // }); // end dir test
 
   // Test for empty objects through debug
   it('| Should console log data was empty object', (done) => {
@@ -62,21 +63,66 @@ describe('Utility Tool Testing', () => {
     done();
   }); // end succesful data test
 
-  // Test for console logs export to logfile
-  it('| Should export to logs file', (done) => {
-    // Setup test data
-    const test = 'Hello';
-    util.debug(test);
+  // // Test for console logs export to logfile
+  // it('| Should export to logs file', (done) => {
+  //   // Setup test data
+  //   const test = 'Hello';
+  //   util.debug(test);
+  //
+  //   // Use FS module to read logfile and search for the test data
+  //   fs.readFile(path + 'logfile.log', 'utf8', (err, data) => {
+  //     if (err) throw err;
+  //     expect(data).to.contain(test);
+  //     done();
+  //   });
+  //   // Erase all test data from logfile
+  //   fs.writeFile(path + 'logfile.log', '', (err) => {
+  //     if (err) throw err;
+  //   });
+  // }); // end export logs test
+});
 
-    // Use FS module to read logfile and search for the test data
-    fs.readFile(path + 'logfile.log', 'utf8', (err, data) => {
-      if (err) throw err;
-      expect(data).to.contain(test);
-      done();
-    });
-    // Erase all test data from logfile
-    fs.writeFile(path + 'logfile.log', '', (err) => {
-      if (err) throw err;
-    });
-  }); // end export logs test
+
+describe('Console Log, Error, Warn: ', () => {
+  // mock obj and string to pass into the util
+  const testObj = { hello: 'test' };
+  const testString = 'test title';
+  // Creating a object of methods for sinon
+  const objspy = {
+    log: (testtitle, obj, methodType) => {
+      util.debug(testtitle, obj, methodType);
+    },
+    error: (testtitle, obj, methodType) => {
+      util.debug(testtitle, obj, methodType);
+    },
+    warn: (testtitle, obj, methodType) => {
+      util.debug(testtitle, obj, methodType);
+    },
+  };
+  after(() => {
+
+  });
+  // settingt the spy on the methods
+  const logit = sinon.spy(objspy, 'log');
+  const errorit = sinon.spy(objspy, 'error');
+  const warnit = sinon.spy(objspy, 'warn');
+
+  // console.log test
+  it('Should util.log', () => {
+    objspy.log(testString, testObj, 'log');
+    expect(logit.calledWith(testString, testObj)).to.be.true;
+    expect(logit.calledOnce).to.be.true;
+  });
+  // console.error test
+  it('Should util.error', () => {
+    objspy.error(testString, testObj, 'error');
+    expect(errorit.calledWith(testString, testObj)).to.be.true;
+    expect(errorit.calledOnce).to.be.true;
+  });
+  // console.warn test
+  it('Should util.warn', () => {
+    objspy.warn(testString, testObj, 'warn');
+    expect(warnit.calledWith(testString, testObj)).to.be.true;
+    expect(warnit.calledOnce).to.be.true;
+  });
 });
