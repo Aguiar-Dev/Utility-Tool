@@ -27,5 +27,8 @@
     "eslint-plugin-react": "^5.2.2",
     "moment": "^2.13.0",
     "sinon": "^1.17.4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }
