@@ -74,3 +74,25 @@ exports.debug = (data) => {
   }
   return info;
 };
+
+exports.vbump = (current, typeOfUpdate) => {
+  let patch = current.patch;
+  let minor = current.minor;
+  let major = current.major;
+  if (typeof typeOfUpdate) {
+    if (typeOfUpdate === 'patch') {
+      patch += 1;
+    }
+    if (typeOfUpdate === 'minor') {
+      minor += 1;
+    }
+    if (typeOfUpdate === 'major') {
+      patch = 0;
+      minor = 0;
+      major += 1;
+    }
+  } else {
+    console.warn('second argument passed in should be either patch, minor, or major');
+  }
+  console.log('Your new version number should be: ' + major + '.' + minor + '.' + patch);
+};
