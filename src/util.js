@@ -1,9 +1,7 @@
 // Setting up all requirements for the tool
 const moment = require('moment');
 const colors = require('colors');
-const fs = require('fs');
-const dir = './log';
-let logstatus;
+
 
 // Setting local colors theme for the logging
 colors.setTheme({
@@ -26,21 +24,22 @@ exports.log = (title, data, status) => {
   console.log(output, colors.data(obj), status);
   /* eslint-enable */
 
-  // Creates Logs folder if it does not already exist
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  }
-
   // Resets all data to original values, without color modifications
   seperator = '\n=================================================\n';
   output = seperator + '[' + now + ']: ' + title + seperator;
-  const log = output + obj + logstatus;
-  // Appends the log to the log.txt file
-  fs.appendFile('log/logfile.log', log, (err) => {
-    /* istanbul ignore if */
-    if (err) throw err;
-  });
-};
+
+// console logging
+  if (process.env.Log) {
+    if (status === undefined || null) {
+      console.error('status is undefined ');
+    } else if (status >= 150) {
+      console.warn('status almost time out');
+    } else {
+      console.log('Status: ' + status);
+    }
+  }
+};// exports of log
+
 
 // The Dubugging functionality
 // checks either empty, undefined, or correct formatting
