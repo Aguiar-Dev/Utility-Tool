@@ -25,23 +25,24 @@ The util-tool was tested using Mocha and Chai for the unit testing. But the unit
 
 ### Logging
 
-In order to log using the util tool simply remember this format `util.log(title, data, status)`.
+In order to log using the util tool simply remember this format `util.writer(title, data, status, consoleMethod)`.
 
-- Title: is the header of the log. It makes it easier to discern where you log is in the logfiles.
+- Title: is the header of the log.
 - Data: is any type of data that you pass in. For logging purposes data is simply a placeholder.
-- Status: is meant to be any piece of information that would benefit the developer. Ex: `Test #3: Succesful function`
+- Status: is meant to be any piece of information that would benefit the developer. Ex: `Test #3: Successful function`
+- consoleMethod: takes one of the strings in the array based on what kind of console you want ['log', 'warn', 'error'].
+They will console in different colors.
 
 Example Output:
 ```
-util.log('Testing Log', '', 'Test successful')
+util.writer('Testing Log', '', 'Test successful', 'log')
 //Data was passed in as an empty string in order to leave whitespace.
 
 Output:
 =================================================
-[2016-06-20T23:18:22-04:00]: Testing Log
+[2016-06-23T14:48:26-04:00]: Testing Log
 =================================================
-''
-Test Successful
+ "" Test successful
 ```
 
 ### Debugging
