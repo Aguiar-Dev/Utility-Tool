@@ -86,3 +86,23 @@ Output:
  ['array']
 Data was passed correctly.
 ```
+
+---
+
+### Version Bump
+
+This module is good to use with gulp.
+
+Call this module to increment the version number.
+
+#### Usage
+```javasc
+const util = require('util-tool');
+
+// takes the current version -> (string)  & tag -> (string) ['major', 'minor', 'patch']
+util.versionbump('1.0.0', 'major');
+```
+#### Returns (string)
+```
+'2.0.0'
+```
